@@ -22,7 +22,7 @@ parameters:
     description: |
       Required: Number of servers to spin up as a part of this deployment.
     type: number
-    default: 2
+    default: 1
     constraints:
     - range:
         min: 1
@@ -47,7 +47,7 @@ parameters:
       Required: Rackspace Cloud Server flavor to use. The size is based on the
       amount of RAM for the provisioned server.
     type: string
-    default: 4 GB Performance
+    default: 1 GB Performance
     constraints:
     - allowed_values:
       - 1 GB Performance
@@ -82,16 +82,12 @@ parameters:
   kitchen:
     description: URL for the kitchen to use
     type: string
-    default: https://github.com/brint/nodejs-multi
+    default: https://github.com/timemachine3030/nodejs-clouddb
 
   chef_version:
     description: Version of chef client to use
     type: string
     default: 11.16.0
-
-  child_template:
-    type: string
-    default: https://raw.github.com/brint/nodejs-multi/master/node-web.yaml
 
   revision:
     label: Revision
@@ -127,7 +123,7 @@ parameters:
   destination:
     label: Site Path
     description: Path to setup your application on your servers.
-    default: /var/www/vhosts/application
+    default: /var/appa
     type: string
 
   stack_id:
@@ -137,15 +133,6 @@ parameters:
   db_server_ip:
     type: string
     default: ''
-
-  database_username:
-    type: string
-    default: ''
-
-  database_user_password:
-    type: string
-    default: ''
-
 
 resources:
 
@@ -199,13 +186,6 @@ resources:
           nodejs_app:
             password: { get_attr: [nodejs_user_password, value] }
             deploy_key: { get_param: deploy_key }
-            database_url:
-              str_replace:
-                template: 'mysql://%dbuser%:%dbpasswd%@%dbhostname%'
-                params:
-                  '%dbuser%': { get_param: database_username }
-                  '%dbpasswd%': { get_param: database_user_password }
-                  '%dbhostname%': { get_param: db_server_ip }
 
 outputs:
   accessIPv4:
