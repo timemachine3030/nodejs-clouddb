@@ -185,7 +185,11 @@ resources:
             deploy_key: { get_param: deploy_key }
             database_url:
               str_replace:
-                template: ''
+                template: 'mysql://%dbuser%:%dbpasswd%@%dbhostname%'
+                params:
+                  '%dbuser%': ''
+                  '%dbpasswd%': ''
+                  '%dbhostname%': ''
 
 outputs:
   accessIPv4:
