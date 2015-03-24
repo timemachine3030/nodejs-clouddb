@@ -1,4 +1,4 @@
-heat_template_version: 2015-03-23
+heat_template_version: 2013-05-23
 
 description: |
   Heat template to deploy a single Node.js server
