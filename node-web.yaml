@@ -1,4 +1,4 @@
-heat_template_version: 2013-05-23
+heat_template_version: 2015-03-23
 
 description: |
   Heat template to deploy a single Node.js server
@@ -123,16 +123,12 @@ parameters:
   destination:
     label: Site Path
     description: Path to setup your application on your servers.
-    default: /var/appa
+    default: /var/apps
     type: string
 
   stack_id:
     type: string
     default: node
-
-  db_server_ip:
-    type: string
-    default: ''
 
 resources:
 
