@@ -183,6 +183,9 @@ resources:
           nodejs_app:
             password: { get_attr: [nodejs_user_password, value] }
             deploy_key: { get_param: deploy_key }
+            database_url:
+              str_replace:
+                template: ''
 
 outputs:
   accessIPv4:
